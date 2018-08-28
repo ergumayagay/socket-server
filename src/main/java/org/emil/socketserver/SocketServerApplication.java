@@ -1,4 +1,4 @@
-package org.tap.socketserver;
+package org.emil.socketserver;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -21,14 +21,12 @@ public class SocketServerApplication {
 	
 
 	@Bean
-	public CommandLineRunner run(SocketServerProperties socketProperties, 
+	public CommandLineRunner run(SocketServerProperties socketServerProperties, 
 			SocketServerService socketServerService) {
+		
 		return args ->{
 			
-			socketServerService.start();
-			logger.info(Integer.toString(socketProperties.getPort()));		
-			
-			
+			socketServerService.start(socketServerProperties.getPort());		
 		};
 		
 	}
