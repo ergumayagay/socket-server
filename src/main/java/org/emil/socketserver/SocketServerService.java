@@ -37,13 +37,15 @@ public class SocketServerService {
 		clientSocket = serverSocket.accept();
 
 		// Print from client socket
-		out = new PrintWriter(clientSocket.getOutputStream());
+		out = new PrintWriter(clientSocket.getOutputStream(), true);
 
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-		String response = in.readLine();
-
-		logger.info("response: {}", response);
+		String response;
+		while((response = in.readLine()) != null){
+			logger.info("message recieved: {}", response);
+			out.println("success");
+		}
 	}
 
 	public void stop() {
